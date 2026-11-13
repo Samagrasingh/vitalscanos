@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VitalScanOS — camera-based wellness check-ins for Android</title>
+<meta name="description" content="VitalScanOS turns your phone camera into private, on-device wellness check-ins: pulse, HRV, breathing and stress estimates. Nothing leaves your phone.">
+<style>
+  :root{
+    --primary:#3ddc97; --on-primary:#06231a; --primary-container:#143529;
+    --surface:#0d1512; --surface-low:#122019; --surface-c:#16211c; --surface-high:#1c2b24;
+    --on-surface:#e8f0ec; --on-variant:#9db3a9; --outline:rgba(255,255,255,.12);
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--surface);color:var(--on-surface);
+    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  main{max-width:840px;margin:0 auto;padding:24px 20px 64px}
+  h1{font-size:2rem;line-height:1.2}
+  h2{color:var(--primary);font-size:1.25rem;margin-bottom:8px}
+  section{margin:40px 0}
+  .muted{color:var(--on-variant)}
+  .card{background:var(--surface-c);border:1px solid var(--outline);
+    border-radius:16px;padding:20px}
+  .hero{padding:48px 0 8px}
+  .hero p{font-size:1.1rem;margin-top:12px;max-width:34em}
+  .tag{display:inline-block;background:var(--primary-container);color:var(--primary);
+    border-radius:999px;padding:4px 14px;font-size:.85rem;margin-bottom:16px}
+  ul{padding-left:1.25em}
+  li{margin:6px 0}
+  .plans{display:grid;gap:16px;grid-template-columns:1fr}
+  @media(min-width:640px){.plans{grid-template-columns:1fr 1fr}}
+  .plan h3{color:var(--primary);margin-bottom:8px}
+  .disclaimer{border-left:3px solid var(--primary);background:var(--surface-low);
+    border-radius:0 12px 12px 0;padding:16px 20px}
+  a{color:var(--primary)}
+  footer{border-top:1px solid var(--outline);margin-top:48px;padding-top:24px;
+    display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
+    font-size:.9rem;color:var(--on-variant)}
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <span class="tag">Android &middot; private by design</span>
+    <h1>VitalScanOS</h1>
+    <p class="muted">Camera-based wellness check-ins for Android. Your phone's camera reads
+    subtle changes in your face to estimate pulse, heart-rate variability, breathing and
+    stress — all processed on your device, with nothing sent anywhere.</p>
+  </section>
+
+  <section id="camera-vitals">
+    <h2>Camera Vitals</h2>
+    <div class="card">
+      <p>Hold still and look at the camera for a 20–30 second scan. VitalScanOS estimates:</p>
+      <ul>
+        <li>Pulse (heart rate)</li>
+        <li>Heart-rate variability (HRV)</li>
+        <li>Breathing rate</li>
+        <li>Stress level</li>
+      </ul>
+      <p class="muted">All results are wellness estimates to help you notice trends — not
+      measurements for medical use.</p>
+    </div>
+  </section>
+
+  <section id="cabin">
+    <h2>Cabin Demo</h2>
+    <div class="card">
+      <p>A demo of in-car wellness sensing: a single camera produces live wellness
+      estimates for a driver and a passenger at the same time, each tracked to their own
+      seat.</p>
+    </div>
+  </section>
+
+  <section id="emotion-lab">
+    <h2>Emotion Lab</h2>
+    <div class="card">
+      <p>On-device facial-expression insights. After a short neutral calibration, Emotion
+      Lab shows how your facial signals shift — processed entirely on your phone.</p>
+    </div>
+  </section>
+
+  <section id="physio-lab">
+    <h2>Physiology Lab</h2>
+    <div class="card">
+      <p>Watch live pulse and breathing trends — follow them during
+      breathing exercises, rest, or activity.</p>
+    </div>
+  </section>
+
+  <section id="plans">
+    <h2>Free vs Pro</h2>
+    <div class="plans">
+      <div class="card plan">
+        <h3>Free</h3>
+        <ul>
+          <li>3 scans per day</li>
+          <li>Heart rate + HRV</li>
+          <li>7 days of history</li>
+          <li>Cabin Demo</li>
+        </ul>
+      </div>
+      <div class="card plan">
+        <h3>Pro</h3>
+        <ul>
+          <li>Unlimited scans</li>
+          <li>Breathing + stress estimates</li>
+          <li>Full history &amp; trends</li>
+          <li>Emotion Lab</li>
+          <li>Physiology Lab</li>
+        </ul>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:12px">Prices shown in Google Play.</p>
+  </section>
+
+  <section id="privacy">
+    <h2>Privacy</h2>
+    <div class="card">
+      <ul>
+        <li>Everything is processed on your phone — camera frames are never saved or sent.</li>
+        <li>No account, no sign-up.</li>
+        <li>Nothing is sent to any server.</li>
+        <li>Export or delete your data anytime in Settings.</li>
+      </ul>
+      <p><a href="privacy-policy.html">Read the full Privacy Policy</a></p>
+    </div>
+  </section>
+
+  <section>
+    <p class="muted">Works best in good, even lighting with the phone held still.
+    Not guaranteed on every device.</p>
+    <p class="disclaimer" style="margin-top:16px">This app is for general wellness and
+    informational use only. It is not a medical device and does not diagnose, treat, cure,
+    or prevent any medical condition. Consult a doctor for medical advice.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p><a href="mailto:thethinkingpixel@gmail.com">thethinkingpixel@gmail.com</a></p>
+  </section>
+
+  <footer>
+    <span>&copy; 2026 Flace Multimedia Pvt Ltd</span>
+    <span><a href="privacy-policy.html">Privacy Policy</a> &middot;
+          <a href="terms.html">Terms</a></span>
+  </footer>
+</main>
+</body>
+</html>
