@@ -5,146 +5,435 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VitalScanOS — camera-based wellness check-ins for Android</title>
 <meta name="description" content="VitalScanOS turns your phone camera into private, on-device wellness check-ins: pulse, HRV, breathing and stress estimates. Nothing leaves your phone.">
-<style>
-  :root{
-    --primary:#3ddc97; --on-primary:#06231a; --primary-container:#143529;
-    --surface:#0d1512; --surface-low:#122019; --surface-c:#16211c; --surface-high:#1c2b24;
-    --on-surface:#e8f0ec; --on-variant:#9db3a9; --outline:rgba(255,255,255,.12);
-  }
-  *{box-sizing:border-box;margin:0}
-  body{background:var(--surface);color:var(--on-surface);
-    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-  main{max-width:840px;margin:0 auto;padding:24px 20px 64px}
-  h1{font-size:2rem;line-height:1.2}
-  h2{color:var(--primary);font-size:1.25rem;margin-bottom:8px}
-  section{margin:40px 0}
-  .muted{color:var(--on-variant)}
-  .card{background:var(--surface-c);border:1px solid var(--outline);
-    border-radius:16px;padding:20px}
-  .hero{padding:48px 0 8px}
-  .hero p{font-size:1.1rem;margin-top:12px;max-width:34em}
-  .tag{display:inline-block;background:var(--primary-container);color:var(--primary);
-    border-radius:999px;padding:4px 14px;font-size:.85rem;margin-bottom:16px}
-  ul{padding-left:1.25em}
-  li{margin:6px 0}
-  .plans{display:grid;gap:16px;grid-template-columns:1fr}
-  @media(min-width:640px){.plans{grid-template-columns:1fr 1fr}}
-  .plan h3{color:var(--primary);margin-bottom:8px}
-  .disclaimer{border-left:3px solid var(--primary);background:var(--surface-low);
-    border-radius:0 12px 12px 0;padding:16px 20px}
-  a{color:var(--primary)}
-  footer{border-top:1px solid var(--outline);margin-top:48px;padding-top:24px;
-    display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
-    font-size:.9rem;color:var(--on-variant)}
-</style>
+<meta property="og:title" content="VitalScanOS — camera-based wellness check-ins for Android">
+<meta property="og:description" content="Private, on-device wellness estimates — pulse, HRV, breathing and stress — processed entirely on your phone.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%233ddc97' stroke-width='3'/%3E%3Cpath d='M8 16h4l2-5 4 10 2-5h4' fill='none' stroke='%233ddc97' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
-<main>
+<body class="no-js">
+<script>document.body.classList.remove("no-js");document.body.classList.add("js")</script>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="wordmark" href="#top" aria-label="VitalScanOS home">
+      <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="#3ddc97" stroke-width="3"/>
+        <path d="M8 16h4l2-5 4 10 2-5h4" fill="none" stroke="#3ddc97" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      VitalScanOS
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#apps">Apps</a>
+      <a href="#reads">What it reads</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <span class="pill" aria-disabled="true" style="margin-left:14px">Coming soon to Google Play</span>
+    <details class="nav-menu">
+      <summary aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </summary>
+      <nav class="menu-list" aria-label="Menu">
+        <a href="#how">How it works</a>
+        <a href="#apps">Apps</a>
+        <a href="#reads">What it reads</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#faq">FAQ</a>
+        <span class="pill" aria-disabled="true">Coming soon to Google Play</span>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
   <section class="hero">
-    <span class="tag">Android &middot; private by design</span>
-    <h1>VitalScanOS</h1>
-    <p class="muted">Camera-based wellness check-ins for Android. Your phone's camera reads
-    subtle changes in your face to estimate pulse, heart-rate variability, breathing and
-    stress — all processed on your device, with nothing sent anywhere.</p>
-  </section>
-
-  <section id="camera-vitals">
-    <h2>Camera Vitals</h2>
-    <div class="card">
-      <p>Hold still and look at the camera for a 20–30 second scan. VitalScanOS estimates:</p>
-      <ul>
-        <li>Pulse (heart rate)</li>
-        <li>Heart-rate variability (HRV)</li>
-        <li>Breathing rate</li>
-        <li>Stress level</li>
-      </ul>
-      <p class="muted">All results are wellness estimates to help you notice trends — not
-      measurements for medical use.</p>
-    </div>
-  </section>
-
-  <section id="cabin">
-    <h2>Cabin Demo</h2>
-    <div class="card">
-      <p>A demo of in-car wellness sensing: a single camera produces live wellness
-      estimates for a driver and a passenger at the same time, each tracked to their own
-      seat.</p>
-    </div>
-  </section>
-
-  <section id="emotion-lab">
-    <h2>Emotion Lab</h2>
-    <div class="card">
-      <p>On-device facial-expression insights. After a short neutral calibration, Emotion
-      Lab shows how your facial signals shift — processed entirely on your phone.</p>
-    </div>
-  </section>
-
-  <section id="physio-lab">
-    <h2>Physiology Lab</h2>
-    <div class="card">
-      <p>Watch live pulse and breathing trends — follow them during
-      breathing exercises, rest, or activity.</p>
-    </div>
-  </section>
-
-  <section id="plans">
-    <h2>Free vs Pro</h2>
-    <div class="plans">
-      <div class="card plan">
-        <h3>Free</h3>
-        <ul>
-          <li>3 scans per day</li>
-          <li>Heart rate + HRV</li>
-          <li>7 days of history</li>
-          <li>Cabin Demo</li>
-        </ul>
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Android &middot; on-device &middot; private by design</span>
+        <h1>Your phone camera, turned into a daily wellness check-in.</h1>
+        <p class="sub">VitalScanOS reads tiny colour changes in your face to estimate pulse,
+        heart-rate variability, breathing and stress — in about 30 seconds, processed
+        entirely on your phone.</p>
+        <div class="btn-row">
+          <a class="btn btn-solid" href="#how">See how it works</a>
+          <a class="btn btn-ghost" href="#apps">Explore the apps</a>
+        </div>
       </div>
-      <div class="card plan">
-        <h3>Pro</h3>
-        <ul>
-          <li>Unlimited scans</li>
-          <li>Breathing + stress estimates</li>
-          <li>Full history &amp; trends</li>
-          <li>Emotion Lab</li>
-          <li>Physiology Lab</li>
-        </ul>
+      <div class="phone-scene" aria-hidden="true">
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="scan-area">
+            <div class="scan-ring"></div>
+            <div class="face"></div>
+          </div>
+          <div class="result-card">
+            <div class="rc-title">Example</div>
+            <div class="rc-row"><span>Pulse</span><b>72 bpm</b></div>
+            <div class="rc-row"><span>HRV</span><b>48 ms</b></div>
+            <div class="rc-row"><span>Stress</span><b>Settled</b></div>
+          </div>
+        </div>
       </div>
     </div>
-    <p class="muted" style="margin-top:12px">Prices shown in Google Play.</p>
   </section>
 
-  <section id="privacy">
-    <h2>Privacy</h2>
-    <div class="card">
-      <ul>
+  <!-- Highlight band -->
+  <div class="band">
+    <div class="wrap">
+      <div class="item">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <rect x="6" y="2" width="12" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M10 18.5h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        On-device processing
+      </div>
+      <div class="item">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 3l7 3v5c0 5-3.2 8.4-7 10-3.8-1.6-7-5-7-10V6z" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        No account, no sign-up
+      </div>
+      <div class="item">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        About 30-second check-in
+      </div>
+      <div class="item">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 21s-6-5.1-6-10a6 6 0 1 1 12 0c0 4.9-6 10-6 10z" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="12" cy="11" r="2.2" fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        Built in India
+      </div>
+    </div>
+  </div>
+
+  <!-- Signal science -->
+  <section class="block">
+    <div class="wrap">
+      <p class="kicker">The engine</p>
+      <h2 class="title">Built on signal science</h2>
+      <p class="lede">Every check-in is a small signal-processing pipeline that runs
+      entirely on your phone — and stays there.</p>
+      <div class="grid cols-4">
+        <div class="card">
+          <div class="icon-chip" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24">
+              <path d="M3 8l3-3h4l2 2h9v11H3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <circle cx="12" cy="13" r="3.4" fill="none" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          <h3>Camera rPPG</h3>
+          <p>The camera picks up the subtle colour change each heartbeat causes in your skin.</p>
+        </div>
+        <div class="card">
+          <div class="icon-chip" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24">
+              <rect x="6" y="2" width="12" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M4 10l5 4-5 4M20 10l-5 4 5 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Runs on your phone</h3>
+          <p>Frames are analysed in memory, never saved or sent — the app has no internet permission.</p>
+        </div>
+        <div class="card">
+          <div class="icon-chip" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24">
+              <path d="M12 3l2.4 4.9 5.6.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.6-.8z"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Quality first</h3>
+          <p>If lighting or movement makes the signal unreliable, it asks you to try again
+          instead of showing you a number.</p>
+        </div>
+        <div class="card">
+          <div class="icon-chip" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24">
+              <path d="M4 19V9M10 19V5M16 19v-7M22 19H2" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Personal trends</h3>
+          <p>Check-ins build your own baseline, so changes are compared with you — not a
+          population average.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="block" id="how">
+    <div class="wrap">
+      <p class="kicker">How it works</p>
+      <h2 class="title">Check in, understand, track</h2>
+      <p class="lede">A daily routine measured in seconds, not minutes.</p>
+      <div class="grid cols-3 steps">
+        <div class="step">
+          <h3>Check in</h3>
+          <p>Look at the camera for about 30 seconds while the app reads your signals.</p>
+        </div>
+        <div class="step">
+          <h3>Understand</h3>
+          <p>See plain-language insights about your heart, breathing, recovery and stress.</p>
+        </div>
+        <div class="step">
+          <h3>Track</h3>
+          <p>Follow your trends over days and weeks as your personal baseline builds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Apps tabs -->
+  <section class="block" id="apps">
+    <div class="wrap">
+      <p class="kicker">Four apps in one</p>
+      <h2 class="title">One install, four ways to look at your signals</h2>
+      <p class="lede">VitalScanOS ships as a small suite — a daily check-in plus three labs
+      for exploring what your camera can read.</p>
+      <div class="tablist" role="tablist" aria-label="VitalScanOS apps">
+        <button role="tab" id="tab-vitals" aria-controls="panel-vitals" aria-selected="true">Camera Vitals</button>
+        <button role="tab" id="tab-cabin" aria-controls="panel-cabin" aria-selected="false">Cabin Demo</button>
+        <button role="tab" id="tab-emotion" aria-controls="panel-emotion" aria-selected="false">Emotion Lab</button>
+        <button role="tab" id="tab-physio" aria-controls="panel-physio" aria-selected="false">Physiology Lab</button>
+      </div>
+      <div class="card tabpanel" role="tabpanel" id="panel-vitals" aria-labelledby="tab-vitals">
+        <h3>Camera Vitals</h3>
+        <p>Hold still and look at the camera for a 20–30 second scan. VitalScanOS estimates:</p>
+        <ul>
+          <li>Pulse (heart rate)</li>
+          <li>Heart-rate variability (HRV)</li>
+          <li>Breathing rate and stress level</li>
+          <li>Plain-language insights compared with your own baseline</li>
+        </ul>
+      </div>
+      <div class="card tabpanel" role="tabpanel" id="panel-cabin" aria-labelledby="tab-cabin">
+        <h3>Cabin Demo</h3>
+        <p>A demo of in-car wellness sensing: a single camera produces live wellness
+        estimates for a driver and a passenger at the same time.</p>
+        <ul>
+          <li>Each person is tracked to their own seat</li>
+          <li>Live estimates update as the session runs</li>
+          <li>A simulated mode is included for trying it anywhere</li>
+        </ul>
+      </div>
+      <div class="card tabpanel" role="tabpanel" id="panel-emotion" aria-labelledby="tab-emotion">
+        <h3>Emotion Lab</h3>
+        <p>On-device facial-expression insights. After a short neutral calibration,
+        Emotion Lab shows how your facial signals shift.</p>
+        <ul>
+          <li>Calibrates to your neutral face first</li>
+          <li>Shows shifts in expression signals over a session</li>
+          <li>Processed entirely on your phone</li>
+        </ul>
+      </div>
+      <div class="card tabpanel" role="tabpanel" id="panel-physio" aria-labelledby="tab-physio">
+        <h3>Physiology Lab</h3>
+        <p>Watch live pulse and breathing trends — follow them during
+        breathing exercises, rest, or activity.</p>
+        <ul>
+          <li>Live trend view while a session runs</li>
+          <li>Use it during breathing exercises or at rest</li>
+          <li>Session summaries stored on your device</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- What it reads -->
+  <section class="block" id="reads">
+    <div class="wrap">
+      <p class="kicker">What it reads</p>
+      <h2 class="title">Estimates, explained plainly</h2>
+      <p class="lede">Four wellness signals per check-in — two free, the rest with Pro.</p>
+      <div class="tbl-wrap">
+        <table class="reads">
+          <thead>
+            <tr><th scope="col">Estimate</th><th scope="col">What it tells you</th><th scope="col">Plan</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Pulse (heart rate)</td>
+              <td>How fast your heart is beating at rest</td>
+              <td><span class="plan-tag">Free</span></td>
+            </tr>
+            <tr>
+              <td>Heart-rate variability (HRV)</td>
+              <td>Beat-to-beat variation, a recovery signal</td>
+              <td><span class="plan-tag">Free</span></td>
+            </tr>
+            <tr>
+              <td>Breathing rate</td>
+              <td>Breaths per minute while you&rsquo;re still</td>
+              <td><span class="plan-tag">Pro</span></td>
+            </tr>
+            <tr>
+              <td>Stress level</td>
+              <td>A 1–10 index built from pulse and HRV</td>
+              <td><span class="plan-tag">Pro</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="caption">All results are wellness estimates to help you notice trends —
+      not measurements for medical use.</p>
+    </div>
+  </section>
+
+  <!-- Free vs Pro -->
+  <section class="block">
+    <div class="wrap">
+      <p class="kicker">Plans</p>
+      <h2 class="title">Free vs Pro</h2>
+      <div class="grid cols-2">
+        <div class="card plan-card">
+          <h3>Free</h3>
+          <ul>
+            <li>Free daily scans</li>
+            <li>Heart rate + HRV</li>
+            <li>7 days of history</li>
+            <li>Cabin Demo</li>
+          </ul>
+        </div>
+        <div class="card plan-card pro">
+          <span class="plan-badge">Pro</span>
+          <h3>VitalScanOS Pro</h3>
+          <ul>
+            <li>Unlimited scans</li>
+            <li>Breathing + stress estimates</li>
+            <li>Full history &amp; trends</li>
+            <li>Emotion Lab</li>
+            <li>Physiology Lab</li>
+          </ul>
+        </div>
+      </div>
+      <p class="fineprint">Free daily scans, with an optional Pro upgrade. Prices shown in
+      Google Play. Cancel anytime in Google Play.</p>
+    </div>
+  </section>
+
+  <!-- Privacy -->
+  <section class="block" id="privacy">
+    <div class="wrap">
+      <p class="kicker">Privacy</p>
+      <h2 class="title">Private by design</h2>
+      <p class="lede">There is no server to send your data to — everything stays on your phone.</p>
+      <ul class="ticklist">
         <li>Everything is processed on your phone — camera frames are never saved or sent.</li>
         <li>No account, no sign-up.</li>
         <li>Nothing is sent to any server.</li>
         <li>Export or delete your data anytime in Settings.</li>
       </ul>
-      <p><a href="privacy-policy.html">Read the full Privacy Policy</a></p>
+      <p style="margin-top:18px"><a href="privacy-policy.html">Read the full Privacy Policy</a></p>
     </div>
   </section>
 
-  <section>
-    <p class="muted">Works best in good, even lighting with the phone held still.
-    Not guaranteed on every device.</p>
-    <p class="disclaimer" style="margin-top:16px">This app is for general wellness and
-    informational use only. It is not a medical device and does not diagnose, treat, cure,
-    or prevent any medical condition. Consult a doctor for medical advice.</p>
+  <!-- FAQ -->
+  <section class="block" id="faq">
+    <div class="wrap">
+      <p class="kicker">FAQ</p>
+      <h2 class="title">Questions, answered</h2>
+      <div style="margin-top:24px">
+        <details class="faq">
+          <summary>Is VitalScanOS a medical device?</summary>
+          <div class="faq-body"><p>No. This app is for general wellness and informational
+          use only. It is not a medical device and does not diagnose, treat, cure, or
+          prevent any medical condition. Consult a doctor for medical advice.</p></div>
+        </details>
+        <details class="faq">
+          <summary>Does my video leave my phone?</summary>
+          <div class="faq-body"><p>No. Camera frames are processed in memory and are never
+          saved or sent anywhere. The app does not have the internet permission, so it
+          cannot send data even if it wanted to.</p></div>
+        </details>
+        <details class="faq">
+          <summary>Which phones does it work on?</summary>
+          <div class="faq-body"><p>Android phones with a front camera. Works best in good,
+          even lighting with the phone held still. Not guaranteed on every device.</p></div>
+        </details>
+        <details class="faq">
+          <summary>Do I need an account?</summary>
+          <div class="faq-body"><p>No. There is no sign-up and nothing to log in to.</p></div>
+        </details>
+        <details class="faq">
+          <summary>How do I delete my data?</summary>
+          <div class="faq-body"><p>In the app, go to Settings &rarr; &ldquo;Delete all my
+          data&rdquo;, or simply uninstall the app. Everything is stored on your device,
+          so deleting it there removes it completely.</p></div>
+        </details>
+      </div>
+    </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p><a href="mailto:thethinkingpixel@gmail.com">thethinkingpixel@gmail.com</a></p>
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap">
+      <div>
+        <h2>Coming soon to Google Play in India.</h2>
+        <p>Questions in the meantime? We&rsquo;re happy to hear them.</p>
+      </div>
+      <a class="btn btn-solid" href="mailto:thethinkingpixel@gmail.com">Contact us</a>
+    </div>
   </section>
 
-  <footer>
-    <span>&copy; 2026 Flace Multimedia Pvt Ltd</span>
-    <span><a href="privacy-policy.html">Privacy Policy</a> &middot;
-          <a href="terms.html">Terms</a></span>
-  </footer>
 </main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="wordmark" href="#top" aria-label="VitalScanOS home">
+          <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <circle cx="16" cy="16" r="14" fill="none" stroke="#3ddc97" stroke-width="3"/>
+            <path d="M8 16h4l2-5 4 10 2-5h4" fill="none" stroke="#3ddc97" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          VitalScanOS
+        </a>
+        <p>A camera-based wellness check-in app for Android. Everything runs on your
+        device — no account, nothing sent to servers.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#apps">The apps</a></li>
+          <li><a href="#reads">What it reads</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Use</a></li>
+          <li><a href="mailto:thethinkingpixel@gmail.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="disclaimer">This app is for general wellness and informational use only. It is
+    not a medical device and does not diagnose, treat, cure, or prevent any medical
+    condition. Consult a doctor for medical advice.</p>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Flace Multimedia Pvt Ltd</span>
+      <span><a href="privacy-policy.html">Privacy</a> &middot; <a href="terms.html">Terms</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
 </body>
 </html>
