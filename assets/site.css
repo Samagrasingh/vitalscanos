@@ -61,7 +61,7 @@ a{color:var(--primary)}
 .btn-ghost{border:1px solid var(--outline);color:var(--on-surface);background:transparent}
 
 /* phone mockup */
-.phone-scene{display:flex;justify-content:center}
+.phone-scene{display:flex;flex-direction:column;align-items:center;justify-content:center}
 .phone{width:250px;border:1px solid var(--outline);border-radius:36px;
   background:linear-gradient(160deg,var(--surface-high),var(--surface-low));
   padding:22px 16px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
@@ -69,7 +69,22 @@ a{color:var(--primary)}
   margin:0 auto 18px}
 .scan-area{position:relative;height:210px;display:flex;align-items:center;
   justify-content:center}
-.face{width:120px;height:150px;border:2px solid rgba(61,220,151,.55);border-radius:50%/55% 55% 45% 45%}
+.face-slide{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;opacity:0;
+  transition:opacity .7s ease;pointer-events:none}
+.face-slide.active{opacity:1}
+.face-frame{position:relative;width:120px;height:150px;border-radius:50%/55% 55% 45% 45%;
+  border:2px solid rgba(61,220,151,.55);overflow:hidden;background:var(--surface-c)}
+.face-frame svg{position:absolute;inset:0;width:100%;height:100%}
+.face-frame .light{position:absolute;inset:0;pointer-events:none}
+.light-chip{position:absolute;top:4px;left:50%;transform:translateX(-50%);
+  background:rgba(0,0,0,.55);color:var(--on-surface);font-size:.6rem;
+  letter-spacing:.05em;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.lm{opacity:0;transition:opacity .6s ease .5s}
+.face-slide.active .lm{opacity:.95}
+.rc-warn{color:#f0b36a;font-size:.78rem;line-height:1.4}
+.phone-cap{margin-top:12px;font-size:.75rem;color:var(--on-variant);
+  text-align:center;max-width:250px}
 .scan-ring{position:absolute;inset:6px;border:1px solid rgba(61,220,151,.3);
   border-radius:50%}
 .scan-ring::after{content:"";position:absolute;inset:-1px;border-radius:50%;
@@ -77,13 +92,15 @@ a{color:var(--primary)}
   animation:spin 4s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .result-card{margin-top:20px;background:var(--surface-c);border:1px solid var(--outline);
-  border-radius:14px;padding:12px 14px;font-size:.8rem}
+  border-radius:14px;padding:12px 14px;font-size:.8rem;min-height:123px}
 .result-card .rc-title{color:var(--on-variant);font-size:.7rem;text-transform:uppercase;
   letter-spacing:.08em;margin-bottom:6px}
 .result-card .rc-row{display:flex;justify-content:space-between;padding:2px 0}
 .result-card .rc-row b{color:var(--primary);font-weight:600}
 @media(prefers-reduced-motion:reduce){
   .scan-ring::after{animation:none}
+  .face-slide{transition:none}
+  .lm{transition:none}
   html{scroll-behavior:auto}
 }
 

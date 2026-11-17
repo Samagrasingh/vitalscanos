@@ -35,4 +35,40 @@
       });
     });
   });
+
+  // Hero face carousel — cross-fade every ~3.5 s, sync the example result card.
+  // Progressive enhancement: no JS or reduced motion → first face stays static.
+  var slides = document.querySelectorAll(".face-slide");
+  var card = document.getElementById("rc-card");
+  if (slides.length > 1 && card &&
+      !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+    var EXAMPLES = [
+      { pulse: "72 bpm", hrv: "48 ms", stress: "Settled" },  // Daylight
+      { pulse: "68 bpm", hrv: "52 ms", stress: "Calm" },     // Indoor warm
+      { pulse: "79 bpm", hrv: "36 ms", stress: "Settled" },  // Office light
+      { pulse: "65 bpm", hrv: "41 ms", stress: "Calm" },     // Evening lamp
+      { pulse: "84 bpm", hrv: "30 ms", stress: "Settled" },  // Window side light
+      null                                                  // Low light → quality gate
+    ];
+    var rcBody = document.getElementById("rc-body");
+    var rcWarn = document.getElementById("rc-warn");
+    var rcPulse = document.getElementById("rc-pulse");
+    var rcHrv = document.getElementById("rc-hrv");
+    var rcStress = document.getElementById("rc-stress");
+    var idx = 0;
+    window.setInterval(function () {
+      slides[idx].classList.remove("active");
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add("active");
+      var ex = EXAMPLES[idx];
+      var weak = ex == null;
+      rcBody.hidden = weak;
+      rcWarn.hidden = !weak;
+      if (!weak) {
+        rcPulse.textContent = ex.pulse;
+        rcHrv.textContent = ex.hrv;
+        rcStress.textContent = ex.stress;
+      }
+    }, 3500);
+  }
 })();
